@@ -1,0 +1,60 @@
+/* Ensure footer wrapper spans full width with no margins and add space below */
+.footer-wrapper {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    margin-top: 5rem; /* Reduced margin */
+    margin-bottom: 0;
+}
+
+/* Ensure footer spans full width */
+.footer-wrapper .footer {
+    width: 100%;
+    background-color: #ADD8E6; /* Light blue background */
+    color: #333; /* Dark text for better contrast */
+    padding-bottom: 1rem;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Footer links hover */
+.footer-link:hover {
+    color: #00008B; /* Dark blue hover */
+    text-decoration: underline;
+}
+
+/* Newsletter input styling */
+#newsletter-form input[type="email"] {
+    border-radius: 0.25rem;
+}
+
+/* Bottom bar styling */
+footer .border-top {
+    border-color: rgba(0,0,0,0.1) !important;
+}
+
+/* Ensure footer content has proper padding */
+.footer .container-fluid {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+/* Make footer stick to bottom of viewport */
+html {
+    height: 100%;
+}
+
+body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.footer-wrapper {
+    flex-shrink: 0;
+    margin-top: auto;
+}

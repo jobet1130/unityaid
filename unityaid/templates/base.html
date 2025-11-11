@@ -26,8 +26,11 @@
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
         <link rel="stylesheet" type="text/plain" href="{% static 'css/bootstrap.min.css.map' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/all.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-icons.min.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" type="text/css" href="{% static 'css/layouts/navbar.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/layouts/footer.css' %}">
 
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
@@ -39,13 +42,21 @@
 
         {# Navbar #}
         {% include "layouts/navbar.html"%}
-        {% block content %}{% endblock %}
+        
+        {# Main content area #}
+        <main>
+            {% block content %}{% endblock %}
+        </main>
+        
+        {# Footer #}
+        {% include "layouts/footer.html"%}
 
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/unityaid.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/layouts/navbar.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/layouts/footer.js' %}"></script>
         
 
         {% block extra_js %}
