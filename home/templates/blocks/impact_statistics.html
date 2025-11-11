@@ -1,0 +1,19 @@
+{% load static %}
+<section class="section-padding bg-white py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">{{ self.section_title }}</h2>
+            {% if self.section_subtitle %}
+            <p class="text-muted">{{ self.section_subtitle }}</p>
+            {% endif %}
+        </div>
+
+        <div class="row">
+            {% for stat in self.stats %}
+            <div class="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                {% include "blocks/stat.html" with self=stat %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

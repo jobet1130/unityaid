@@ -1,0 +1,12 @@
+{% load static %}
+<div class="text-center mb-4">
+    {% if self.icon_name %}
+    <i class="lucide-icon display-4 mb-2">{{ self.icon_name }}</i>
+    {% endif %}
+
+    <h3 class="fw-bold">
+        {{ self.number }}{% if self.suffix %}{{ self.suffix }}{% endif %}
+    </h3>
+
+    <p class="text-muted mb-0">{{ self.label }}</p>
+</div>

@@ -1,0 +1,51 @@
+/* Section padding and background */
+.section-padding {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+}
+
+/* Section header */
+.section-padding h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.section-padding p.text-muted {
+    font-size: 1.125rem;
+}
+
+/* Statistic card styling */
+.stat-card {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    cursor: default;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    background-color: #f8f9fa; /* Light hover */
+}
+
+.stat-card i {
+    font-size: 3rem;
+    color: #1e3a8a; /* Primary accent */
+    margin-bottom: 0.5rem;
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stat-card p {
+    font-size: 1rem;
+    color: #6c757d; /* muted */
+}
+
+/* Animated counting numbers */
+.stat-number {
+    display: inline-block;
+}
