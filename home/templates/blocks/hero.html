@@ -1,0 +1,32 @@
+{% load static %}
+{% image self.background_image original as bg %}
+<section 
+  class="hero d-flex align-items-center justify-content-center text-center text-white"
+  style="background-image: url('{{ bg.url }}'); background-size: cover; background-position: center;
+         {% if self.height == 'full' %}height: 100vh;{% elif self.height == 'medium' %}height: 70vh;{% else %}height: 50vh;{% endif %}"
+>
+    <div class="overlay position-absolute w-100 h-100"></div>
+
+    <div class="container position-relative">
+        <h1 class="display-4 fw-bold mb-3">{{ self.title }}</h1>
+        {% if self.subtitle %}
+           <p class="lead mb-4">{{ self.subtitle }}</p>            
+        {% endif %}
+
+        {% if self.primary_button_text or self.secondary_button_text %}
+          <div class="d-flex justify-content-center gap-2 flex-wrap">
+            {% if self.primary_button_text %}
+                <a href="{{ self.primary_button_text|default: '#'}}" class="btn btn-primary btn-lg hero-btn" data-btn="primary">
+                    {{ self.primary_button_text }}
+                </a>
+            {% endif %}
+            {% if self.secondary_button_text %}
+               <a href="{{ self.secondary_button_text|default: '#'}}" class="btn btn-outline-light btn-lg hero-btn" data-btn="secondary">
+                    {{ self.secondary_button_text }}
+               </a>
+            {% endif %}
+          </div>
+        {% endif%}
+        <div id="hero-response" class="mt-3"></div>
+    </div>
+</section>
