@@ -1,0 +1,26 @@
+{% load static wagtailcore_tags %}
+
+<section class="py-5 bg-light" id="team-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">{{ self.title }}</h2>
+      {% if self.subtitle %}
+        <p class="text-muted">{{ self.subtitle }}</p>
+      {% endif %}
+    </div>
+
+    <div id="team-members" class="row g-4 justify-content-center">
+      {% for member in self.members %}
+        <div class="col-12 col-sm-6 col-lg-3">
+          {% include_block member %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+      <button id="refresh-team" class="btn btn-primary px-4 py-2">
+        Refresh Team Members
+      </button>
+    </div>
+  </div>
+</section>

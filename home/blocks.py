@@ -256,3 +256,30 @@ class ProjectCardsBlock(blocks.StructBlock):
         template = "blocks/project_cards.html"
         icon = "folder"
         label = "Project Cards Section"
+
+# ======================================================
+# 7. TeamMemberBlocks
+# ======================================================
+class TeamMemberBlock(blocks.StructBlock):
+    image = ImageChooserBlock(required=True, help_text="Team member image")
+    name = blocks.CharBlock(required=True, max_length=100, help_text="Team member name")
+    role = blocks.CharBlock(required=True, max_length=100, help_text="Team member role")
+    linkedIn = blocks.URLBlock(required=False, help_text="Team member LinkedIn profile")
+
+    class Meta:
+        icon = "user"
+        label = "Team Member"
+        template = "blocks/team_member.html"
+
+# ======================================================
+# 8. TeamSectionBlock
+# ======================================================
+class TeamSectionBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=True, default="Our Team", help_text="Section title")
+    subtitle = blocks.TextBlock(required=False, help_text="Optional section subtitle")
+    members = blocks.ListBlock(TeamMemberBlock(), help_text="List of team members")
+
+    class Meta:
+        icon = "group"
+        label = "Team Section"
+        template = "blocks/team_section.html"

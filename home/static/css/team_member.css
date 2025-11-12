@@ -1,0 +1,70 @@
+/**
+ * team_member.css
+ * ----------------------
+ * Styles for individual Team Member cards.
+ *
+ * Author: Jobet P. Casquejo
+ * Date: 11-12-2025
+ * Version: 1.0
+ */
+
+/* Card Styles */
+.team-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  .team-card .team-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  
+  .team-card:hover .team-img {
+    transform: scale(1.1);
+  }
+  
+  /* LinkedIn Button */
+  .linkedin-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    color: #fff;
+    background-color: #0077b5;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 2;
+  }
+  
+  .linkedin-btn:hover {
+    background-color: #fbbf24;
+    transform: scale(1.1);
+  }
+  
+  /* Card Body */
+  .team-card .card-body {
+    text-align: center;
+  }
+  
+  .team-card .card-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .team-card .card-text {
+    color: #6c757d; /* Bootstrap secondary text */
+    font-size: 0.9rem;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 576px) {
+    .team-card .team-img {
+      height: 200px;
+    }
+  }
+  

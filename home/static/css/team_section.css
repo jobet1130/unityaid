@@ -1,0 +1,38 @@
+/**
+ * team_section.css
+ * ----------------------
+ * Styles for the Team Section container and layout.
+ *
+ * Author: Jobet P. Casquejo
+ * Date: 11-12-2025
+ * Version: 1.0
+ */
+
+ #team-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -0.5rem; /* Adjust spacing for Bootstrap row gutters */
+  }
+  
+  .team-member {
+    padding: 0.5rem;
+  }
+  
+  .team-section-title {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .team-section-subtitle {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #6c757d; /* Bootstrap secondary text color */
+  }
+  
+  @media (max-width: 768px) {
+    .team-section-title,
+    .team-section-subtitle {
+      text-align: center;
+    }
+  }
+  

@@ -1,0 +1,23 @@
+{% load wagtailimages_tags %}
+
+<div class="card border-0 shadow-sm h-100 team-card text-center">
+  <div class="position-relative overflow-hidden">
+    {% image self.image fill-400x400 class="card-img-top img-fluid" alt=self.name %}
+    {% if self.linkedIn %}
+      <a
+        href="{{ self.linkedIn }}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="position-absolute top-0 end-0 m-2 bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
+        style="width: 40px; height: 40px;"
+        aria-label="LinkedIn profile"
+      >
+        <i class="fab fa-linkedin fa-lg"></i>
+      </a>
+    {% endif %}
+  </div>
+  <div class="card-body">
+    <h5 class="card-title fw-bold">{{ self.name }}</h5>
+    <p class="card-text text-muted">{{ self.role }}</p>
+  </div>
+</div>

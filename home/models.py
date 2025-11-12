@@ -43,7 +43,9 @@ from .blocks import (
     ImpactStatisticBlock,
     SectionHeaderBlock,
     ProjectCardBlock,
-    ProjectCardsBlock
+    ProjectCardsBlock,
+    TeamMemberBlock,
+    TeamSectionBlock
 )
 
 
@@ -76,6 +78,8 @@ class HomePage(Page):
             ('impact_statistic', ImpactStatisticBlock()),
             ('project_card', ProjectCardBlock()),
             ('project_cards', ProjectCardsBlock()),
+            ('team_member', TeamMemberBlock()),
+            ('team_section', TeamSectionBlock()),
         ],
         use_json_field=True,
         null=True,
