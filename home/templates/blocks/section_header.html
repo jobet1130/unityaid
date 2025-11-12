@@ -1,0 +1,13 @@
+{% load static %}
+<div class="section-header mb-5{% if self.centered %} text-center{% endif %}">
+    <h2 class="section-header-title mb-4 position-relative d-inline-block">
+        {{ self.title }}
+        <div class="section-header-underline"></div>
+    </h2>
+    {% if self.subtitle %}
+    <p class="section-header-subtitle{% if self.centered %} mx-auto{% endif %}">
+        {{ self.subtitle }}
+    </p>
+    {% endif %}
+</div>
+

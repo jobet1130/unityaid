@@ -1,0 +1,40 @@
+/* Section Header Styles - Matching React Component */
+/* Note: margin-bottom is handled by Bootstrap's mb-5 class (3rem) */
+
+.section-header-title {
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #111827;
+}
+
+.section-header-underline {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 4px; /* h-1 equivalent */
+    background-color: #FBBF24; /* bg-[#FBBF24] */
+    transform: translateY(8px); /* translate-y-2 equivalent */
+    border-radius: 2px;
+}
+
+.section-header-subtitle {
+    color: #6b7280; /* text-gray-600 */
+    font-size: 1.125rem; /* text-lg */
+    line-height: 1.75;
+    max-width: 42rem; /* max-w-2xl equivalent */
+    margin-top: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-header-title {
+        font-size: 1.75rem;
+    }
+    
+    .section-header-subtitle {
+        font-size: 1rem;
+    }
+}
+

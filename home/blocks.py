@@ -12,6 +12,9 @@ Blocks Included:
 1. HeroBlock              – Defines a full-width banner section with image and CTA buttons.
 2. StatsBlock             – Represents individual statistics with icons and numeric labels.
 3. ImpactStatisticBlock   – Displays grouped statistical metrics to showcase organization impact.
+4. SectionHeaderBlock     – Displays a section header with title, optional subtitle, and centering option.
+5. ProjectCardBlock       – Displays a project card with image, title, location, description, and status.
+6. ProjectCardsBlock      – Displays a section with multiple project cards in a grid layout.
 
 Author:
 --------
@@ -147,3 +150,109 @@ class ImpactStatisticBlock(blocks.StructBlock):
         template = "blocks/impact_statistics.html"
         icon = "group"
         label = "Impact Statistics Section"
+
+
+# ======================================================
+# 4. SECTION HEADER BLOCK
+# ======================================================
+class SectionHeaderBlock(blocks.StructBlock):
+    """
+    Represents a section header with a title, optional subtitle,
+    and optional text centering.
+
+    Attributes:
+    -----------
+    title : CharBlock
+        The main heading text (required).
+    subtitle : TextBlock
+        Optional subtitle text displayed below the title.
+    centered : BooleanBlock
+        Whether to center-align the text (default: True).
+    """
+
+    title = blocks.CharBlock(required=True, help_text="Main heading text")
+    subtitle = blocks.TextBlock(required=False, help_text="Optional subtitle text")
+    centered = blocks.BooleanBlock(
+        required=False,
+        default=True,
+        help_text="Center-align the header text"
+    )
+
+    class Meta:
+        template = "blocks/section_header.html"
+        icon = "title"
+        label = "Section Header"
+
+
+# ======================================================
+# 5. PROJECT CARD BLOCK
+# ======================================================
+class ProjectCardBlock(blocks.StructBlock):
+    """
+    Represents a project card displaying project information
+    with an image, title, location, description, and status.
+
+    Attributes:
+    -----------
+    image : ImageChooserBlock
+        Project image displayed at the top of the card.
+    title : CharBlock
+        Project title (required).
+    location : CharBlock
+        Project location (required).
+    description : TextBlock
+        Project description (required).
+    status : ChoiceBlock
+        Project status (Active, Ongoing, or Completed).
+    link : URLBlock
+        Optional link to the project page or details.
+    """
+
+    image = ImageChooserBlock(required=True, help_text="Project image")
+    title = blocks.CharBlock(required=True, max_length=200, help_text="Project title")
+    location = blocks.CharBlock(required=True, max_length=100, help_text="Project location")
+    description = blocks.TextBlock(required=True, help_text="Project description")
+    status = blocks.ChoiceBlock(
+        choices=[
+            ('Active', 'Active'),
+            ('Ongoing', 'Ongoing'),
+            ('Completed', 'Completed'),
+        ],
+        required=True,
+        default='Active',
+        help_text="Project status"
+    )
+    link = blocks.URLBlock(required=False, help_text="Optional link to project details page")
+
+    class Meta:
+        template = "blocks/project_card.html"
+        icon = "doc-full"
+        label = "Project Card"
+
+
+# ======================================================
+# 6. PROJECT CARDS SECTION BLOCK
+# ======================================================
+class ProjectCardsBlock(blocks.StructBlock):
+    """
+    Represents a section that groups multiple project cards together,
+    often used to showcase multiple projects in a grid layout.
+
+    Attributes:
+    -----------
+    section_title : CharBlock
+        Optional title for the projects section.
+    section_subtitle : TextBlock
+        Optional subtitle for the projects section.
+    projects : ListBlock
+        A list of `ProjectCardBlock` items to display.
+    """
+
+    section_title = blocks.CharBlock(required=False, max_length=200, help_text="Optional title for the projects section")
+    section_subtitle = blocks.TextBlock(required=False, help_text="Optional subtitle for the projects section")
+    projects = blocks.ListBlock(ProjectCardBlock(), help_text="List of project cards")
+
+    class Meta:
+        template = "blocks/project_cards.html"
+        icon = "folder"
+        label = "Project Cards Section"

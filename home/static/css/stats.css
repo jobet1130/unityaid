@@ -1,0 +1,44 @@
+/* Stat Card Styles - Matching React Component */
+.stat-card {
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.stat-icon-wrapper {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #E0F2FE;
+    margin-bottom: 1rem;
+}
+
+.stat-icon-wrapper i {
+    font-size: 32px;
+    color: #1E3A8A;
+}
+
+.stat-number {
+    font-size: 2.25rem;
+    font-weight: bold;
+    color: #1E3A8A;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    color: #6b7280;
+    margin-bottom: 0;
+}
+

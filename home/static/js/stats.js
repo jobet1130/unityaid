@@ -22,6 +22,7 @@ $(document).ready(function () {
      */
     function animateStat(el) {
         const $el = $(el);
+        const $numberValue = $el.find('.stat-number-value');
         const target = parseInt($el.data("count"), 10);
 
         if (isNaN(target)) {
@@ -29,16 +30,19 @@ $(document).ready(function () {
             return;
         }
 
+        // If no .stat-number-value span exists, fall back to updating the element itself
+        const $targetEl = $numberValue.length > 0 ? $numberValue : $el;
+
         $({ countNum: 0 }).animate(
             { countNum: target },
             {
                 duration: 2000,
                 easing: "swing",
                 step: function () {
-                    $el.text(Math.floor(this.countNum));
+                    $targetEl.text(Math.floor(this.countNum).toLocaleString());
                 },
                 complete: function () {
-                    $el.text(target.toLocaleString());
+                    $targetEl.text(target.toLocaleString());
                 },
             }
         );
@@ -81,7 +85,7 @@ $(document).ready(function () {
      * Expected Response:
      * {
      *   "stats": [
-     *     {"label": "Lives Reached", "number": 50000},
+     *     {"label": "Lives Reached", "number": 50000, "suffix": "+"},
      *     {"label": "Meals Served", "number": 250000}
      *   ]
      * }
@@ -91,26 +95,69 @@ $(document).ready(function () {
             url: url,
             method: "GET",
             dataType: "json",
+            timeout: 5000,
 
             success: function (response, status, xhr) {
                 console.group("Stats AJAX Response");
                 console.log("HTTP Status:", xhr.status);
                 console.log("Status Text:", status);
                 console.log("Headers:", xhr.getAllResponseHeaders());
+                console.log("Content-Type:", xhr.getResponseHeader('Content-Type'));
                 console.log("Response Data:", response);
                 console.groupEnd();
 
+                // Validate Content-Type
+                const contentType = xhr.getResponseHeader('Content-Type');
+                if (contentType && !contentType.includes('application/json')) {
+                    console.warn("Unexpected response format:", contentType);
+                    return;
+                }
+
+                // Validate response structure
                 if (response && Array.isArray(response.stats)) {
                     response.stats.forEach(function (stat, idx) {
                         const $stat = $(".stat-number").eq(idx);
-                        $stat
-                            .data("count", stat.number)
-                            .text("0")
-                            .removeClass("animated");
+                        
+                        if ($stat.length) {
+                            const $numberValue = $stat.find('.stat-number-value');
+                            const $targetEl = $numberValue.length > 0 ? $numberValue : $stat;
+                            
+                            // Update data attributes
+                            $stat.data("count", stat.number || 0);
+                            
+                            // Update suffix if provided
+                            if (stat.suffix !== undefined) {
+                                const $suffix = $stat.find('.stat-suffix');
+                                if (stat.suffix) {
+                                    if ($suffix.length) {
+                                        $suffix.text(stat.suffix);
+                                    } else {
+                                        $stat.append('<span class="stat-suffix">' + stat.suffix + '</span>');
+                                    }
+                                } else {
+                                    $suffix.remove();
+                                }
+                            }
+                            
+                            // Update label if provided
+                            if (stat.label) {
+                                const $label = $stat.closest('.stat-card').find('.stat-label');
+                                if ($label.length) {
+                                    $label.text(stat.label);
+                                }
+                            }
+                            
+                            // Reset animation
+                            $stat.removeClass("animated");
+                            $targetEl.text("0");
+                        }
                     });
-                    checkStatsInView(); // re-trigger animations
+                    
+                    // Re-trigger animations
+                    checkStatsInView();
                 } else {
                     console.warn("Unexpected JSON structure:", response);
+                    console.warn("Expected: { \"stats\": [...] }");
                 }
             },
 
@@ -120,15 +167,25 @@ $(document).ready(function () {
                 console.error("Status Text:", status);
                 console.error("Error Message:", error);
                 console.error("Response Text:", xhr.responseText);
+                console.error("Response JSON:", xhr.responseJSON);
                 console.groupEnd();
 
-                // Optional visual feedback
-                const $toast = $("<div class='toast-error'>Failed to load stats. Please try again.</div>");
-                $("body").append($toast);
-                $toast.fadeIn(300).delay(2500).fadeOut(500, function () {
-                    $(this).remove();
-                });
+                // Visual feedback with Bootstrap alert
+                const $toast = $('<div class="alert alert-danger alert-dismissible fade show position-fixed top-0 end-0 m-3" role="alert" style="z-index: 9999;">' +
+                    '<strong>Error:</strong> Failed to load stats. ' +
+                    '<span class="small">Status: ' + xhr.status + ', ' + status + '</span>' +
+                    '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>' +
+                    '</div>');
+                $('body').append($toast);
+
+                setTimeout(function () {
+                    $toast.alert('close');
+                }, 5000);
             },
+
+            complete: function (xhr, status) {
+                console.log("Stats AJAX Request Complete:", status);
+            }
         });
     };
 });

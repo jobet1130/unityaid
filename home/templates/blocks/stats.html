@@ -1,12 +1,25 @@
 {% load static %}
-<div class="text-center mb-4">
+<div class="stat-card">
     {% if self.icon_name %}
-    <i class="lucide-icon display-4 mb-2">{{ self.icon_name }}</i>
+    <div class="stat-icon-wrapper">
+        {% if self.icon_name == 'users' %}
+            <i class="bi bi-people-fill"></i>
+        {% elif self.icon_name == 'utensils' %}
+            <i class="bi bi-utensils-fill"></i>
+        {% elif self.icon_name == 'heart' %}
+            <i class="bi bi-heart-fill"></i>
+        {% elif self.icon_name == 'globe' %}
+            <i class="bi bi-globe"></i>
+        {% else %}
+            <i class="bi bi-circle-fill"></i>
+        {% endif %}
+    </div>
     {% endif %}
 
-    <h3 class="fw-bold">
-        {{ self.number }}{% if self.suffix %}{{ self.suffix }}{% endif %}
-    </h3>
+    <div class="stat-number" 
+         data-count="{{ self.number|default:'0'|floatformat:0 }}">
+        <span class="stat-number-value">0</span>{% if self.suffix %}<span class="stat-suffix">{{ self.suffix }}</span>{% endif %}
+    </div>
 
-    <p class="text-muted mb-0">{{ self.label }}</p>
+    <p class="stat-label">{{ self.label }}</p>
 </div>

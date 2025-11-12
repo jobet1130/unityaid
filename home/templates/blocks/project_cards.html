@@ -1,19 +1,22 @@
 {% load static %}
 <section class="section-padding bg-white py-5">
     <div class="container">
+        {% if self.section_title %}
         <div class="text-center mb-5">
             <h2 class="fw-bold">{{ self.section_title }}</h2>
             {% if self.section_subtitle %}
             <p class="text-muted">{{ self.section_subtitle }}</p>
             {% endif %}
         </div>
+        {% endif %}
 
-        <div class="row">
-            {% for stat in self.stats %}
-            <div class="col-12 col-md-6 col-lg-3 d-flex justify-content-center mb-4">
-                {% include "blocks/stats.html" with self=stat %}
+        <div class="row project-cards-container">
+            {% for project in self.projects %}
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
+                {% include "blocks/project_card.html" with self=project %}
             </div>
             {% endfor %}
         </div>
     </div>
 </section>
+

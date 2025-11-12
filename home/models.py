@@ -14,6 +14,9 @@ Blocks Supported:
 1. HeroBlock            – A large banner with title, subtitle, and CTA buttons.
 2. StatsBlock           – Individual statistic with icon and label.
 3. ImpactStatisticBlock – Grouped impact metrics to highlight achievements.
+4. SectionHeaderBlock   – Section header with title, optional subtitle, and centering option.
+5. ProjectCardBlock     – Project card with image, title, location, description, and status.
+6. ProjectCardsBlock    – Section with multiple project cards in a grid layout.
 
 Author:
 --------
@@ -34,7 +37,14 @@ from wagtail.fields import StreamField
 from wagtail.admin.panels import FieldPanel
 
 # Import custom StreamField blocks
-from .blocks import HeroBlock, StatsBlock, ImpactStatisticBlock
+from .blocks import (
+    HeroBlock,
+    StatsBlock,
+    ImpactStatisticBlock,
+    SectionHeaderBlock,
+    ProjectCardBlock,
+    ProjectCardsBlock
+)
 
 
 # ======================================================
@@ -44,16 +54,16 @@ class HomePage(Page):
     """
     Represents the main landing page of the UnityAid website.
 
-    This page uses Wagtail’s StreamField to allow administrators and
+    This page uses Wagtail's StreamField to allow administrators and
     content editors to flexibly compose sections like hero banners,
-    impact statistics, and metric visualizations.
+    section headers, impact statistics, project cards, and metric visualizations.
 
     Attributes:
     -----------
     content : StreamField
         Contains a series of dynamic content blocks such as Hero,
-        Stats, and Impact Statistics. Editors can add or reorder
-        these blocks within the CMS.
+        Section Header, Stats, Impact Statistics, Project Cards, and Project Cards Section.
+        Editors can add or reorder these blocks within the CMS.
     subtitle : CharField
         Optional subtitle displayed under the page title.
     """
@@ -61,8 +71,11 @@ class HomePage(Page):
     content = StreamField(
         [
             ('hero_section', HeroBlock()),
+            ('section_header', SectionHeaderBlock()),
             ('stats', StatsBlock()),
             ('impact_statistic', ImpactStatisticBlock()),
+            ('project_card', ProjectCardBlock()),
+            ('project_cards', ProjectCardsBlock()),
         ],
         use_json_field=True,
         null=True,
